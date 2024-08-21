@@ -1,7 +1,44 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 * {
   margin: 0;
 }
+
+.card-container {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  background-color:  rgba(0, 0, 0, 0.85);
+}
+
+.card {
+  width: 25vw;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 2rem;
+  background-color: rgba(0, 0, 0, 0.55);
+
+  text-align: center;
+  list-style-type: none;
+  display: inline-block;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.card h3 {
+  color: gold;
+}
+
+.card p {
+  color: white;
+}
+
