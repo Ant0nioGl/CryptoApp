@@ -23,11 +23,28 @@ db.connect();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
+let baseLink = 'https://pro-api.coinmarketcap.com'
 
 app.get("/api/crypto-map", async (req, res) => {
   try {
-    const response = await axios.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/map', {
+    const response = await axios.get(baseLink + '/v1/cryptocurrency/map', {
+      headers: {
+        'X-CMC_PRO_API_KEY': process.env.API_KEY,
+      },
+    });
+    // Success
+    res.json(response.data);
+    
+  } catch (ex) {
+    // Fail
+    console.log(ex);
+    res.status(500).json({ error: 'Failed to fetch data' });
+  }
+});
+
+app.get("/api/listings", async (req, res) => {
+  try {
+    const response = await axios.get(baseLink + '/v1/cryptocurrency/listings/latest', {
       headers: {
         'X-CMC_PRO_API_KEY': process.env.API_KEY,
       },

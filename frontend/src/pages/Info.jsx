@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from "axios"
 import Navbar from '../components/Navbar/Navbar.jsx'
 
-
+// TODO: Extract into components for separation of concerns if it will be used.
 function Info() {  
   const [cryptoData, setCryptoData] = useState([]);
   const [error, setError] = useState(null);

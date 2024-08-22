@@ -34,6 +34,11 @@
     color: gold;
 }
 
+.option a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .sign-in {
     margin-left: auto;
     padding: 1rem 1.5rem;
