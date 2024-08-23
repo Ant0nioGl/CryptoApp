@@ -38,8 +38,8 @@ function Home() {
             <Navbar />
             <div className='tabs-container'>
                 <Tab
-                    className="header"
                     rank={"#"}
+                    name={"Header"}
                     symbol={""}
                     cryptoIcon={'/coin.png'}
                     marketCap={"Market cap"}

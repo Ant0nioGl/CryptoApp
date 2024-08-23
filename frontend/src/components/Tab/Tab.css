@@ -30,3 +30,8 @@
     width: 10vw;
     font-size: 1.25rem;
 }
+
+.tab-container.header {
+    margin: 0;
+    background-color: rgba(66, 8, 175, 0.15);
+}
