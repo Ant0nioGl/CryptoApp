@@ -1,17 +1,23 @@
 .tabs-container {
     margin: 0;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: white;
 }
 
 .tab-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border: 1px solid gold;
     border-radius: 1rem;
+    background-color: rgba(66, 8, 175, 0.05);
     padding: 20px;
-    margin: 15px;
+    margin: 5px;
+}
+
+.tab-container span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .tab-container img {
@@ -20,7 +26,7 @@
 }
 
 .tab-container a {
-    color: rgba(255, 217, 0, 0.75);
+    color: black;
     width: 10vw;
     font-size: 1.25rem;
 }

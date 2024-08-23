@@ -31,39 +31,30 @@ function Home() {
       };
   
       fetchData();
-  }, []);  
-
-    const headerStyle = {
-        display: 'flex',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        padding: '20px',
-        margin: '15px',
-        width: '75vw'
-    };
-
-    const textStyle = {
-        fontSize: '1.25rem',
-        color: 'gold'
-    };
+  }, []);
 
     return (
         <div>
             <Navbar />
             <div className='tabs-container'>
-                <div style={headerStyle}>
-                    <a style={textStyle}>Name</a>
-                    <a style={textStyle}>Market Cap</a>
-                    <a style={textStyle}>Price</a>
-                    <a style={textStyle}> 24h %</a>
-                </div>
+                <Tab
+                    className="header"
+                    rank={"#"}
+                    symbol={""}
+                    cryptoIcon={'/coin.png'}
+                    marketCap={"Market cap"}
+                    price={"Price"}
+                    percentChange={"% 24h"}
+                    graphIcon={'/graph.png'} 
+                />
                 {cryptoData.filter((_, index) => index < 20).map(crypto => {
                     const meta = metadata && metadata[crypto.id]
                     return (
                         <Tab
                             key={crypto.id}
                             rank={crypto.cmc_rank}
-                            name={crypto.name}
+                            name={crypto.name} //currently not used
+                            symbol={meta ? meta.symbol : ''}
                             cryptoIcon={meta ? meta.logo : '/coin.png'}
                             marketCap={`$${crypto.quote.USD.market_cap.toLocaleString()}`}
                             price={`$${crypto.quote.USD.price.toFixed(2)}`}

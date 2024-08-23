@@ -1,12 +1,17 @@
 import './Tab.css'
 
 function Tab(props) {
-    const percentChangeColor = props.percentChange.includes('-') ? 'red' : 'green';
+    let percentChangeColor = props.percentChange.includes('-') ? 'red' : 'green';
+    if (props.rank === "#") {
+        percentChangeColor = 'black';
+    }
 
     return (
         <div className="tab-container">
-            <a className='name'>#{props.rank} {props.name}</a>
-            <img src={props.cryptoIcon} alt="crypto icon"></img>
+            <span>
+                <a className='name'>{props.rank} &nbsp; {props.symbol}</a>
+                <img src={props.cryptoIcon} alt="crypto icon"></img>
+            </span>
             <a>{props.marketCap}</a>
             <a>{props.price}</a>
             <a style={{ color: percentChangeColor }}>{props.percentChange}</a>
