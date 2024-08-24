@@ -1,6 +1,6 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Home from './pages/Home.jsx'
-import Info from './pages/Info.jsx'
+import Market from './pages/Market.jsx'
 import NoPage from './pages/NoPage.jsx';
 
 
@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path='/home' element={<Home />} />
-          <Route path='/info' element={<Info />} />
+          <Route path='/markets' element={<Market />} />
           <Route path='*' element={<NoPage />} />
         </Routes>
       </BrowserRouter>

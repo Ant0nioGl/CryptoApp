@@ -25,23 +25,6 @@ app.use(bodyParser.json());
 
 let baseLink = 'https://pro-api.coinmarketcap.com'
 
-app.get("/api/crypto-map", async (req, res) => {
-  try {
-    const response = await axios.get(baseLink + '/v1/cryptocurrency/map', {
-      headers: {
-        'X-CMC_PRO_API_KEY': process.env.API_KEY,
-      },
-    });
-    // Success
-    res.json(response.data);
-    
-  } catch (ex) {
-    // Fail
-    console.log(ex);
-    res.status(500).json({ error: 'Failed to fetch data' });
-  }
-});
-
 app.get('/api/metadata-info', async (req, res) => {
   const { ids } = req.query;
   try {

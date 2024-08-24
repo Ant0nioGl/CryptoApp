@@ -7,33 +7,3 @@
 * {
   margin: 0;
 }
-
-.card-container {
-  padding: 0;
-  margin: 0;
-  text-align: center;
-}
-
-.card {
-  width: 25vw;
-  padding: 10px;
-  margin: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: none;
-  border-radius: 2rem;
-  background-color: rgba(66, 8, 175, 0.65);
-
-  text-align: center;
-  list-style-type: none;
-  display: inline-block;
-}
-
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  background-color: rgba(66, 8, 175, 0.55);
-}
-
-.card p, h3 {
-  color: white;
-}
-
