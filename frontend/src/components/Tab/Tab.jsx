@@ -1,7 +1,7 @@
-import './Tab.css'
+import './Tab.css';
 
 function Tab(props) {
-    if (props.name == "Header"){
+    if (props.name === "Header"){
         return (
             <div className="tab-container header">
                 <span>
@@ -10,7 +10,17 @@ function Tab(props) {
                 </span>
                 <a>{props.marketCap}</a>
                 <a>{props.price}</a>
-                <a style={{ color: 'black' }}>{props.percentChange}</a>
+                <a>
+                    <select name="percent-change-dropdown"
+                            id='percent-change-dropdown'
+                            onChange={(e) => props.onChangePercentChange(e.target.value)}>
+                        <option value="percent_change_24h">% 24h</option>
+                        <option value="percent_change_7d">% 7d</option>
+                        <option value="percent_change_30d">% 30d</option>
+                        <option value="percent_change_60d">% 60d</option>
+                        <option value="percent_change_90d">% 90d</option>
+                    </select>
+                </a>
             </div>
         );
     }

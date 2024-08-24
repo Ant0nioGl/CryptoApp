@@ -6,7 +6,9 @@ import Tab from '../components/Tab/Tab';
 function Market() {
     const [cryptoData, setCryptoData] = useState([]);
     const [metadata, setMetadata] = useState([]);
+    const [percentChange, setPercentChange] = useState("percent_change_24h");
     const [error, setError] = useState(null);
+    const noOfCrypto = 50 // To change in the future?
 
     useEffect(() => {
       const fetchData = async () => {
@@ -14,9 +16,9 @@ function Market() {
               const response = await axios.get('http://localhost:3000/api/listings');
               setCryptoData(response.data.data);
   
-              // Extract top 20 crypto IDs
+              // Extract top crypto IDs
               const cryptoIds = response.data.data
-                  .filter((_, index) => index < 20)
+                  .filter((_, index) => index < noOfCrypto)
                   .map(crypto => crypto.id)
                   .join(',');
   
@@ -31,7 +33,11 @@ function Market() {
       };
   
       fetchData();
-  }, []);
+    }, []);
+
+    const handlePercentChange = (value) => {
+        setPercentChange(value);
+    };
 
     return (
         <div>
@@ -45,10 +51,11 @@ function Market() {
                     marketCap={"Market cap"}
                     price={"Price"}
                     percentChange={"% 24h"}
-                    graphIcon={'/graph.png'} 
+                    onChangePercentChange={handlePercentChange}
                 />
-                {cryptoData.filter((_, index) => index < 20).map(crypto => {
-                    const meta = metadata && metadata[crypto.id]
+                {cryptoData.filter((_, index) => index < noOfCrypto).map(crypto => {
+                    const meta = metadata && metadata[crypto.id];
+                    const percentChangeValue = crypto.quote.USD[percentChange];
                     return (
                         <Tab
                             key={crypto.id}
@@ -58,8 +65,7 @@ function Market() {
                             cryptoIcon={meta ? meta.logo : '/coin.png'}
                             marketCap={`$${crypto.quote.USD.market_cap.toLocaleString()}`}
                             price={`$${crypto.quote.USD.price.toFixed(2)}`}
-                            percentChange={`${crypto.quote.USD.percent_change_24h.toFixed(2)}%`}
-                            graphIcon={crypto.quote.USD.percent_change_24h > 0 ? "/stocks-up.png" : "/stocks-down.png"}
+                            percentChange={`${percentChangeValue.toFixed(2)}%`}
                         />
                     );
                 })}

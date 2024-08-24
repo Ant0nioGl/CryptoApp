@@ -35,3 +35,11 @@
     margin: 0;
     background-color: rgba(66, 8, 175, 0.15);
 }
+
+#percent-change-dropdown {
+    font-size: 1.25rem;
+    padding: 0.25rem;
+    margin-left: -1rem;
+    border-radius: 1rem;
+    border: none;
+}
