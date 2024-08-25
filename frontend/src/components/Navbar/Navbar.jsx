@@ -15,7 +15,7 @@ function Navbar() {
                 <li className='option'>Buy Crypto</li>
                 <li className='option'>My Portfolio</li>
             </ul>
-            <button className='sign-in'>Sign in</button>
+            <button className='sign-in'> <Link to='/register'>Sign in</Link></button>
         </div>
     </>
     )
