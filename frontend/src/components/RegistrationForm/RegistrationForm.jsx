@@ -1,5 +1,7 @@
 import './RegistrationForm.css'
 import React, {useState} from 'react';
+import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 function RegistrationForm() {
     const [data, setData] = useState({
@@ -8,6 +10,8 @@ function RegistrationForm() {
         email: '',
         password: ''
     });
+
+    const history = useHistory();
 
     const handleChange = (e) => {
         setData({
@@ -18,8 +22,19 @@ function RegistrationForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // To handle form submission (send data to backend)
-        console.log('Form data:', data);
+
+        // Handle form submission (send data to backend)
+        try {
+            const response = axios.post('http://localhost:3000/register', data);
+            // Redirect to success page
+            if (response.status === 201) {
+                history.push('/registration-success');
+            }
+        } catch (error) {
+            // Redirect to failure page
+            console.log('Error during registration.');
+            history.push('/registration-failure');
+        }
     };
 
     return (
