@@ -1,7 +1,7 @@
-import './RegistrationForm.css'
-import React, {useState} from 'react';
-import { useHistory } from 'react-router-dom'
-import axios from 'axios'
+import './RegistrationForm.css';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function RegistrationForm() {
     const [data, setData] = useState({
@@ -10,8 +10,9 @@ function RegistrationForm() {
         email: '',
         password: ''
     });
+    const [error, setError] = useState(''); // Error while registration
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setData({
@@ -20,20 +21,22 @@ function RegistrationForm() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Handle form submission (send data to backend)
         try {
-            const response = axios.post('http://localhost:3000/register', data);
+            const response = await axios.post('http://localhost:3000/register', data);
             // Redirect to success page
             if (response.status === 201) {
-                history.push('/registration-success');
+                navigate('/register-success');
+            } else {
+                // Handle unexpected responses
+                setError('Unexpected response from server.');
             }
         } catch (error) {
-            // Redirect to failure page
-            console.log('Error during registration.');
-            history.push('/registration-failure');
+            // Setting the error meassage
+            console.error('Error during registration:', error);
+            setError('Registration failed. Please try again.');
         }
     };
 
@@ -90,6 +93,7 @@ function RegistrationForm() {
                     />
                 </div>
                 <button type="submit">Register</button>
+                {error && <div className='error-message'>{error}</div>}
             </form>
         </div>
     );
