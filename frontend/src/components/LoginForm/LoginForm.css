@@ -1,20 +1,18 @@
-.register-container {
+.login-container {
     height: 91.5vh;
     display: flex;
     justify-content: center;
     text-align: center; /* only for register button */
     align-items: center;
-
-
 }
 
-.register-form {
+.login-form {
     padding: 6rem;
     background-color: rgba(27, 4, 70, 0.85);
     border-radius: 2rem;
 }
 
-.register-form div {
+.login-form div {
     padding: 0.5rem;
     margin: 0.5rem;
     text-align: left;
@@ -23,13 +21,13 @@
     font-size: 1.5rem;
 }
 
-.register-form input {
+.login-form input {
     width: 25rem;
     height: 2rem;
     font-size: 1.25rem;
 }
 
-.register-form button {
+.login-form button {
     border: none;
     border-radius: 1rem;
     padding: 1.5rem 3rem;
@@ -40,7 +38,7 @@
     cursor: pointer;
 }
 
-.register-form input {
+.login-form input {
     border-radius: 0.5rem;
     border: none;
 }
