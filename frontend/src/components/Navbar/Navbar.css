@@ -13,6 +13,7 @@
     background-color: rgba(27, 4, 70, 0.85);
     padding: 0.5vh;
     height: 7.5vh;
+    position: relative;
 }
 
 .logo {
@@ -50,7 +51,6 @@
     cursor: pointer;
     border-radius: 0.75rem;
     border: 0;
-
     color: white;
     font-weight: 500;
     font-size: 1.25rem;
@@ -64,7 +64,56 @@
     background-color: rgba(255, 217, 0, 0.6);
 }
 
+#logout {
+    background-color: rgba(255, 0, 0, 0.4);
+}
+
 .sign-in a {
     text-decoration: none;
     color: inherit;
+}
+
+/* Styles for smaller screens */
+.hamburger {
+    display: none;
+    font-size: 3rem;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 0.5rem;
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-links.open {
+    display: block;
+    position: absolute;
+    top: 7.5vh;
+    left: 0;
+    right: 0;
+    background-color: rgba(27, 4, 70, 0.95);
+    text-align: center;
+    z-index: 1;
+}
+
+.nav-links.open li {
+    margin: 1rem 0;
+}
+
+/* Media Query */
+@media (max-width: 850px) {
+    .navbar ul {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .sign-in {
+        display: none;
+    }
 }
