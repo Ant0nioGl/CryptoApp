@@ -43,3 +43,30 @@
     border-radius: 1rem;
     border: none;
 }
+
+@media screen and (max-width: 900px) {
+    .tab-container a {
+        font-size: 1rem;
+    }
+
+    .tab-container img {
+        width: 30px;
+        height: 30px;
+    }
+
+    #percent-change-dropdown {
+        font-size: 1rem;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    .tab-container a {
+        font-size: 0.55rem;
+    }
+
+    .tab-container img {
+        width: 20px;
+        height: 20px;
+    }
+}

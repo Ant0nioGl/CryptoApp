@@ -39,6 +39,20 @@ function Market() {
         setPercentChange(value);
     };
 
+    function formatMarketCap(marketCap) {
+        if (marketCap >= 1e12) {
+            return `${(marketCap / 1e12).toFixed(2)} T`; // Trillions
+        } else if (marketCap >= 1e9) {
+            return `${(marketCap / 1e9).toFixed(2)} B`; // Billions
+        } else if (marketCap >= 1e6) {
+            return `${(marketCap / 1e6).toFixed(2)} M`; // Millions
+        } else if (marketCap >= 1e3) {
+            return `${(marketCap / 1e3).toFixed(2)} K`; // Thousands
+        } else {
+            return marketCap.toString(); // Less than 1K
+        }
+    }    
+
     return (
         <div>
             <Navbar />
@@ -63,8 +77,8 @@ function Market() {
                             name={crypto.name} //currently not used
                             symbol={meta ? meta.symbol : ''}
                             cryptoIcon={meta ? meta.logo : '/coin.png'}
-                            marketCap={`$${crypto.quote.USD.market_cap.toLocaleString()}`}
-                            price={`$${crypto.quote.USD.price.toFixed(2)}`}
+                            marketCap={`$${formatMarketCap(crypto.quote.USD.market_cap)}`}
+                            price={`$${crypto.quote.USD.price < 1 ? crypto.quote.USD.price.toFixed(4) : crypto.quote.USD.price.toFixed(2)}`}
                             percentChange={`${percentChangeValue.toFixed(2)}%`}
                         />
                     );

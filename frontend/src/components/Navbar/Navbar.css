@@ -111,6 +111,7 @@
 
     .hamburger {
         display: block;
+        margin-right: 30px;
     }
 
     .sign-in {
