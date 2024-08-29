@@ -37,7 +37,7 @@ function Navbar() {
             <ul className={isMenuOpen ? 'nav-links open' : 'nav-links'}>
                 <li className='option'><Link to="/home">Home</Link></li>
                 <li className='option'> <Link to="/markets">Markets</Link></li>
-                <li className='option'>Buy Crypto</li>
+                <li className='option'><Link to="/buy-crypto">Buy Crypto</Link></li>
                 <li className='option'>My Portfolio</li>
             </ul>
             <div className='sign-in'>
