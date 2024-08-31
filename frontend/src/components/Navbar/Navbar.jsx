@@ -35,16 +35,16 @@ function Navbar() {
                 &#9776;
             </div>
             <ul className={isMenuOpen ? 'nav-links open' : 'nav-links'}>
-                <li className='option'><Link to="/home">Home</Link></li>
-                <li className='option'> <Link to="/markets">Markets</Link></li>
-                <li className='option'><Link to="/buy-crypto">Buy Crypto</Link></li>
+                <Link to="/home"><li className='option'>Home</li></Link>
+                <Link to="/markets"><li className='option'>Markets</li></Link>
+                <Link to="/buy-crypto"><li className='option'>Buy Crypto</li></Link>
                 <li className='option'>My Portfolio</li>
             </ul>
             <div className='sign-in'>
                 {!isLoggedIn ? (
                     <>
-                        <button id='login'><Link to='/login'>Log in</Link></button>
-                        <button id='sign-in'> <Link to='/register'>Sign in</Link></button>
+                        <Link to='/login'><button id='login'>Log in</button></Link>
+                        <Link to='/register'><button id='sign-in'>Sign in</button></Link>
                     </>
                 ) : (
                     <button id='logout' onClick={handleLogout}>Log out</button>
