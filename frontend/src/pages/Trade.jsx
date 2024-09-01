@@ -21,19 +21,17 @@ function Trade() {
         fetchCryptoData();
     }, []);
 
+    // Create a map of currency to USD value
+    const cryptoToUsdMap = cryptoData.reduce((acc, crypto) => {
+        acc[crypto.symbol] = crypto.quote.USD.price;
+        return acc;
+    }, {});
+
     return (
         <div>
             <Navbar />
-            <TradeForm />
-            <div className="crypto-list">
-                {error && <p>{error}</p>}
-                {cryptoData.map(crypto => (
-                    <div key={crypto.id} className="crypto-item">
-                        <span>{crypto.name}</span>
-                        <span>${crypto.quote.USD.price.toFixed(4)}</span>
-                    </div>
-                ))}
-            </div>
+            <TradeForm cryptoToUsdMap={cryptoToUsdMap} />
+            {error && <p>{error}</p>}
         </div>
     );
 }

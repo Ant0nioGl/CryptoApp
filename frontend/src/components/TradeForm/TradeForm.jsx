@@ -1,14 +1,26 @@
 import React, { useState } from 'react';
 import './TradeForm.css';
+import axios from 'axios';
 
-function TradeForm() {
+function TradeForm({ cryptoToUsdMap }) {
     const fiatCurrencies = ['USD', 'EUR'];
-    const cryptoCurrencies = ['BTC', 'ETH', 'LTC'];
+    const cryptoCurrencies = Object.keys(cryptoToUsdMap);
 
     const [amount, setAmount] = useState('');
-    const [fiatCurrency, setFiatCurrency] = useState('USD'); // Default to 'USD'
+    const [fiatCurrency, setFiatCurrency] = useState('USD');
     const [cryptoCurrency, setCryptoCurrency] = useState('');
     const [filteredCryptoCurrencies, setFilteredCryptoCurrencies] = useState([]);
+
+    const EUR_TO_USD = 1.11;
+
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+        return (
+            <div>
+                <h1>Please log in before proceeding.</h1>
+            </div>
+        );
+    }
 
     const handleAmountChange = (e) => {
         setAmount(e.target.value);
@@ -37,15 +49,49 @@ function TradeForm() {
         setFilteredCryptoCurrencies([]);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        alert(`You want to buy ${cryptoCurrency} with ${amount} ${fiatCurrency}.`);
-        // Handle the form submission logic here
+        const cryptoValueInUsd = cryptoToUsdMap[cryptoCurrency];
+        if (cryptoValueInUsd) {
+            let noOfCryptoCoins = amount / cryptoValueInUsd;
+            let priceAtPurchase = cryptoValueInUsd;
+
+            if (fiatCurrency === 'EUR') {
+                noOfCryptoCoins *= EUR_TO_USD;
+                priceAtPurchase = cryptoValueInUsd / EUR_TO_USD; // Adjust price for EUR
+            }
+
+            // Prepare the data to send to the backend
+            const tradeData = {
+                crypto_name: cryptoCurrency,
+                amount: noOfCryptoCoins,
+                price_at_purchase: priceAtPurchase,
+                fiat_currency: fiatCurrency
+            };
+
+            try {
+                const response = await axios.post('http://localhost:3000/purchase', tradeData, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+                if (response.status === 201) {
+                    alert('Trade successful!');
+                } else {
+                    alert('Trade failed. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error during trade:', error);
+                alert('Trade failed. Please try again.');
+            }
+        } else {
+            alert('Please select a valid cryptocurrency.');
+        }
     };
 
     return (
         <form className="trade-form" onSubmit={handleSubmit}>
-
             <div className="form-group">
                 <label htmlFor="fiatCurrency">Fiat Currency:</label>
                 <select

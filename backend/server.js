@@ -25,6 +25,24 @@ app.use(bodyParser.json());
 
 let baseLink = 'https://pro-api.coinmarketcap.com'
 
+const verifyToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.sendStatus(401); // Unauthorized
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.sendStatus(403); // Forbidden
+    }
+    req.user = user;
+    next();
+  });
+};
+
+
 // GET Route for attaing cryptocurrency metadata (symbol, icon etc.)
 app.get('/api/metadata-info', async (req, res) => {
   const { ids } = req.query;
@@ -120,6 +138,28 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Failed to login' });
   }
 });
+
+// POST Route for handling crypto purchases
+app.post('/purchase', verifyToken, async (req, res) => {
+  const { crypto_name, amount, price_at_purchase, fiat_currency } = req.body;
+  const user_id = req.user.id;
+
+  try {
+    const insertQuery = `
+      INSERT INTO purchases (user_id, crypto_name, amount, price_at_purchase) 
+      VALUES ($1, $2, $3, $4)
+      RETURNING *;
+    `;
+
+    const result = await db.query(insertQuery, [user_id, crypto_name, amount, price_at_purchase]);
+
+    res.status(201).json({ msg: 'Purchase successful', purchase: result.rows[0] });
+  } catch (err) {
+    console.error('Error handling purchase:', err);
+    res.status(500).json({ error: 'Failed to complete purchase' });
+  }
+});
+
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
