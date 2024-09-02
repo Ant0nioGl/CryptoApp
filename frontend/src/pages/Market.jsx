@@ -78,7 +78,7 @@ function Market() {
                             symbol={meta ? meta.symbol : ''}
                             cryptoIcon={meta ? meta.logo : '/coin.png'}
                             marketCap={`$${formatMarketCap(crypto.quote.USD.market_cap)}`}
-                            price={`$${crypto.quote.USD.price < 1 ? crypto.quote.USD.price.toFixed(4) : crypto.quote.USD.price.toFixed(2)}`}
+                            price={`$${crypto.quote.USD.price < 1 ? crypto.quote.USD.price.toFixed(6) : crypto.quote.USD.price.toFixed(2)}`}
                             percentChange={`${percentChangeValue.toFixed(2)}%`}
                         />
                     );

@@ -38,7 +38,7 @@ function Navbar() {
                 <Link to="/home"><li className='option'>Home</li></Link>
                 <Link to="/markets"><li className='option'>Markets</li></Link>
                 <Link to="/buy-crypto"><li className='option'>Buy Crypto</li></Link>
-                <li className='option'>My Portfolio</li>
+                <Link to="/portfolio"><li className='option'>My Portfolio</li></Link>
             </ul>
             <div className='sign-in'>
                 {!isLoggedIn ? (

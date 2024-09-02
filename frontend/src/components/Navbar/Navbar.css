@@ -36,6 +36,11 @@
     color: white;
 }
 
+.navbar Link {
+    text-decoration: none;
+    color: inherit;
+}
+
 .option a {
     text-decoration: none;
     color: inherit;

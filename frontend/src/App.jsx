@@ -6,6 +6,7 @@ import Registration from './pages/Registration/Registration.jsx';
 import Success from './pages/Registration/Success.jsx';
 import Login from './pages/Login.jsx'
 import Trade from './pages/Trade.jsx';
+import Portfolio from './pages/Portfolio.jsx';
 
 
 function App() {  
@@ -20,6 +21,7 @@ function App() {
           <Route path='/register-success' element={<Success />} />
           <Route path='/login' element={<Login />} />
           <Route path='/buy-crypto' element={<Trade />} />
+          <Route path='/portfolio' element={<Portfolio />} />
           <Route path='*' element={<NoPage />} />
         </Routes>
       </BrowserRouter>

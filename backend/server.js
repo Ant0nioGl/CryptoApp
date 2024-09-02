@@ -144,19 +144,55 @@ app.post('/purchase', verifyToken, async (req, res) => {
   const { crypto_name, amount, price_at_purchase, fiat_currency } = req.body;
   const user_id = req.user.id;
 
+  const EUR_TO_USD = 1.11; 
+
   try {
+    let priceInUsd = price_at_purchase;
+
+    // Convert the price to USD if the fiat currency is EUR
+    if (fiat_currency === 'EUR') {
+      priceInUsd = price_at_purchase * EUR_TO_USD;
+    }
+
+    // Prepare the query to insert the purchase in USD
     const insertQuery = `
       INSERT INTO purchases (user_id, crypto_name, amount, price_at_purchase) 
       VALUES ($1, $2, $3, $4)
       RETURNING *;
     `;
 
-    const result = await db.query(insertQuery, [user_id, crypto_name, amount, price_at_purchase]);
+    const result = await db.query(insertQuery, [user_id, crypto_name, amount, priceInUsd]);
 
     res.status(201).json({ msg: 'Purchase successful', purchase: result.rows[0] });
   } catch (err) {
     console.error('Error handling purchase:', err);
     res.status(500).json({ error: 'Failed to complete purchase' });
+  }
+});
+
+
+// GET Route for attaining info about user's purchases
+app.get('/purchase-info', verifyToken, async (req, res) => {
+  const user_id = req.user.id; // Get the current user's ID from the verified token
+
+  try {
+    const selectQuery = `
+      SELECT crypto_name, SUM(amount) AS total_amount
+      FROM purchases 
+      WHERE user_id = $1
+      GROUP BY crypto_name;
+    `;
+
+    const result = await db.query(selectQuery, [user_id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ msg: 'No purchases found for this user' });
+    }
+
+    res.status(200).json({ msg: 'Purchases retrieved successfully', purchases: result.rows });
+  } catch (err) {
+    console.error('Error retrieving purchases:', err);
+    res.status(500).json({ error: 'Failed to retrieve purchases' });
   }
 });
 
