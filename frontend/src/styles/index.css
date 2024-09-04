@@ -8,8 +8,16 @@
   margin: 0;
 }
 
+.portfolio-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 90vh;
+}
+
 .doughnut-chart {
-  max-height: 80vh;
+  height: 80vh;
+  width: 60vw;
   display: flex;
   align-items: center;
   justify-content: center;

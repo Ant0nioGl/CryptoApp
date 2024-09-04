@@ -16,6 +16,8 @@ function Portfolio() {
     const [data, setData] = useState([]);
     const [error, setError] = useState('');
     const [cryptoPrices, setCryptoPrices] = useState({});
+    const [investment, setInvestment] = useState(0);
+    const [currentValue, setCurrentValue] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -48,6 +50,24 @@ function Portfolio() {
 
                 setCryptoPrices(cryptoToUsdMap);
 
+                // Calculate the current value of the user's holdings
+                const currentValueCalc = purchaseResponse.data.purchases.reduce((acc, purchase) => {
+                    return acc + (purchase.total_amount * cryptoToUsdMap[purchase.crypto_name] || 0);
+                }, 0);
+                
+                setCurrentValue(currentValueCalc);
+
+                // Fetch user's total investment
+                const invesmentResponse = await axios.get('http://localhost:3000/investment-info', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+                // Set the investment value; ensure it's a number
+                const fetchedInvestment = invesmentResponse.data.investment || 0;
+                setInvestment(fetchedInvestment);
+
             } catch (err) {
                 console.error('Error fetching data:', err);
                 setError('Failed to fetch purchase data or cryptocurrency prices');
@@ -56,6 +76,9 @@ function Portfolio() {
 
         fetchData();
     }, []);
+
+    // Calculate the profit or loss
+    const profit = currentValue - investment;
 
     // Prepare data for the Doughnut chart
     const chartData = {
@@ -95,7 +118,7 @@ function Portfolio() {
         <div>
             <Navbar />
             {error && <h1>{error}</h1>}
-            <div>
+            <div className='portfolio-container'>
                 {data.length === 0 ? (
                     <p>No purchases found</p>
                 ) : (
@@ -103,6 +126,16 @@ function Portfolio() {
                         <Doughnut data={chartData} />
                     </div>
                 )}
+                <div>
+                    <h1>Total invested: ${investment !== undefined ? Math.floor(investment * 100) / 100 : '0.00'}</h1>
+                    <h1 
+                        style={{
+                            color: profit >= 0 ? 'green' : 'red'
+                        }}
+                    >
+                        Profit: {profit < 0 ? '- $' + Math.abs(profit.toFixed(2)): '$ ' + profit.toFixed(2)}
+                    </h1>
+                </div>
             </div>
         </div>
     );

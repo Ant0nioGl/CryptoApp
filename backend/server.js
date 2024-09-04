@@ -171,7 +171,7 @@ app.post('/purchase', verifyToken, async (req, res) => {
 });
 
 
-// GET Route for attaining info about user's purchases
+// GET Route for obtaining info about user's purchases
 app.get('/purchase-info', verifyToken, async (req, res) => {
   const user_id = req.user.id; // Get the current user's ID from the verified token
 
@@ -193,6 +193,30 @@ app.get('/purchase-info', verifyToken, async (req, res) => {
   } catch (err) {
     console.error('Error retrieving purchases:', err);
     res.status(500).json({ error: 'Failed to retrieve purchases' });
+  }
+});
+
+// GET Route for obtaining info about user's total investment price
+app.get('/investment-info', verifyToken, async (req, res) => {
+  const user_id = req.user.id; // Get the current user's ID from the verified token
+
+  try {
+    const selectQuery = `
+      SELECT SUM(amount * price_at_purchase) AS total_investment
+      FROM purchases 
+      WHERE user_id = $1;
+    `;
+
+    const result = await db.query(selectQuery, [user_id]);
+
+    if (!result.rows[0].total_investment) {
+      return res.status(404).json({ msg: 'No purchases found for this user' });
+    }
+
+    res.status(200).json({ msg: 'Investment retrieved successfully', investment: result.rows[0].total_investment });
+  } catch (err) {
+    console.error('Error retrieving investment:', err);
+    res.status(500).json({ error: 'Failed to retrieve investment' });
   }
 });
 
