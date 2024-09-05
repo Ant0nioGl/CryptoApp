@@ -37,6 +37,7 @@
 }
 
 #percent-change-dropdown {
+    width: 7.5rem;
     font-size: 1.25rem;
     padding: 0.25rem;
     margin-left: -1rem;
@@ -56,6 +57,7 @@
 
     #percent-change-dropdown {
         font-size: 1rem;
+        width: 12.5vw;
     }
 
 }

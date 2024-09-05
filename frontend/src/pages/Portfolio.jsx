@@ -25,7 +25,7 @@ function Portfolio() {
                 const token = sessionStorage.getItem('token');
 
                 if (!token) {
-                    setError('User is not logged in');
+                    setError('Please log in before proceeding.');
                     return;
                 }
 
@@ -70,7 +70,7 @@ function Portfolio() {
 
             } catch (err) {
                 console.error('Error fetching data:', err);
-                setError('Failed to fetch purchase data or cryptocurrency prices');
+                setError('Start investing to see your portfolio.');
             }
         };
 
@@ -120,7 +120,7 @@ function Portfolio() {
             {error && <h1>{error}</h1>}
             <div className='portfolio-container'>
                 {data.length === 0 ? (
-                    <p>No purchases found</p>
+                    <></>
                 ) : (
                     <div className='doughnut-chart'>
                         <Doughnut data={chartData} />

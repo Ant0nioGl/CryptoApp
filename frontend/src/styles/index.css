@@ -8,6 +8,11 @@
   margin: 0;
 }
 
+h1 {
+  text-align: center;
+  margin-top: 4rem;
+}
+
 .portfolio-container {
   display: flex;
   justify-content: space-around;
