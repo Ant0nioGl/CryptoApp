@@ -18,6 +18,7 @@ function Portfolio() {
     const [cryptoPrices, setCryptoPrices] = useState({});
     const [investment, setInvestment] = useState(0);
     const [currentValue, setCurrentValue] = useState(0);
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // Track if the user is logged in
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,8 +27,11 @@ function Portfolio() {
 
                 if (!token) {
                     setError('Please log in before proceeding.');
+                    setIsLoggedIn(false);
                     return;
                 }
+
+                setIsLoggedIn(true);
 
                 // Fetch user's purchase info
                 const purchaseResponse = await axios.get('http://localhost:3000/purchase-info', {
@@ -118,25 +122,28 @@ function Portfolio() {
         <div>
             <Navbar />
             {error && <h1>{error}</h1>}
-            <div className='portfolio-container'>
-                {data.length === 0 ? (
-                    <></>
-                ) : (
-                    <div className='doughnut-chart'>
-                        <Doughnut data={chartData} />
+            {isLoggedIn && (
+                <div className='portfolio-container'>
+                    {data.length === 0 ? (
+                        <></>
+                    ) : (
+                        <div className='doughnut-chart'>
+                            <Doughnut data={chartData} />
+                        </div>
+                    )}
+
+                    <div>
+                        <h1>Total invested: ${investment !== undefined ? Math.floor(investment * 100) / 100 : '0.00'}</h1>
+                        <h1 
+                            style={{
+                                color: profit >= 0 ? 'green' : 'red'
+                            }}
+                        >
+                            Profit: {profit < 0 ? '- $' + Math.abs(profit.toFixed(2)) : '$ ' + profit.toFixed(2)}
+                        </h1>
                     </div>
-                )}
-                <div>
-                    <h1>Total invested: ${investment !== undefined ? Math.floor(investment * 100) / 100 : '0.00'}</h1>
-                    <h1 
-                        style={{
-                            color: profit >= 0 ? 'green' : 'red'
-                        }}
-                    >
-                        Profit: {profit < 0 ? '- $' + Math.abs(profit.toFixed(2)): '$ ' + profit.toFixed(2)}
-                    </h1>
                 </div>
-            </div>
+                )}
         </div>
     );
 }
