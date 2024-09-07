@@ -14,6 +14,11 @@
     margin: 5px;
 }
 
+.tab-container:hover {
+    background-color: rgba(66, 8, 175, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
 .tab-container span {
     display: flex;
     justify-content: space-between;

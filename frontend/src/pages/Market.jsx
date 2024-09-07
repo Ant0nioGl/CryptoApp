@@ -8,7 +8,6 @@ function Market() {
     const [metadata, setMetadata] = useState([]);
     const [percentChange, setPercentChange] = useState("percent_change_24h");
     const [error, setError] = useState(null);
-    const noOfCrypto = 50 // To change in the future?
 
     useEffect(() => {
       const fetchData = async () => {
@@ -18,7 +17,6 @@ function Market() {
   
               // Extract top crypto IDs
               const cryptoIds = response.data.data
-                  .filter((_, index) => index < noOfCrypto)
                   .map(crypto => crypto.id)
                   .join(',');
   
@@ -67,7 +65,7 @@ function Market() {
                     percentChange={"% 24h"}
                     onChangePercentChange={handlePercentChange}
                 />
-                {cryptoData.filter((_, index) => index < noOfCrypto).map(crypto => {
+                {cryptoData.map(crypto => {
                     const meta = metadata && metadata[crypto.id];
                     const percentChangeValue = crypto.quote.USD[percentChange];
                     return (
