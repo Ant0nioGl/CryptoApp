@@ -29,12 +29,56 @@
   transform: scale(1.05);
 }
 
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+.banner-container h2 {
+  color: white;
+  font-size: 2rem;
+  letter-spacing: 0.25rem;
+  margin: 0 0.5rem;
 }
 
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: gold; }
+.color-text {
+  color: gold;
+}
+
+/* Responsive styling */
+@media (max-width: 1200px) {
+  .banner-container h1 {
+    font-size: 6rem;
+    letter-spacing: 0.6rem;
+  }
+
+  .banner-container h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .banner-container h1 {
+    font-size: 4rem;
+    letter-spacing: 0.4rem;
+  }
+
+  .banner-container h2 {
+    font-size: 1.25rem;
+  }
+
+  .banner-container {
+    padding-right: 2rem;
+  }
+}
+
+@media (max-width: 670px) {
+  .banner-container h1 {
+    font-size: 2.5rem;
+    letter-spacing: 0.3rem;
+  }
+
+  .banner-container h2 {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .banner-container {
+    padding-right: 1rem;
+  }
 }
