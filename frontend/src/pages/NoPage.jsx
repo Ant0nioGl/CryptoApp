@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar/Navbar";
 
 function NoPage() {
     return (
-        <div>
+        <div className="content-container">
             <Navbar />
             <h1>Error 404: This page doesn't exist.</h1>
         </div>

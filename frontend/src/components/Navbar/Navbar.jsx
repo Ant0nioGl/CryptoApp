@@ -39,6 +39,17 @@ function Navbar() {
                 <Link to="/markets"><li className='option'>Markets</li></Link>
                 <Link to="/buy-crypto"><li className='option'>Buy Crypto</li></Link>
                 <Link to="/portfolio"><li className='option'>My Portfolio</li></Link>
+                
+                {/* Conditionally render the login and register links in the menu when it is open */}
+                {isMenuOpen && !isLoggedIn && (
+                    <>
+                        <Link to="/login"><li className='option'>Log in</li></Link>
+                        <Link to="/register"><li className='option'>Sign in</li></Link>
+                    </>
+                )}
+                {isMenuOpen && isLoggedIn && (
+                    <li className='option' onClick={handleLogout}>Log out</li>
+                )}
             </ul>
             <div className='sign-in'>
                 {!isLoggedIn ? (

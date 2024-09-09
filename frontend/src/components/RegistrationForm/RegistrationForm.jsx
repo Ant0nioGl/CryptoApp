@@ -1,6 +1,6 @@
 import './RegistrationForm.css';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 function RegistrationForm() {
@@ -10,7 +10,7 @@ function RegistrationForm() {
         email: '',
         password: ''
     });
-    const [error, setError] = useState(''); // Error while registration
+    const [error, setError] = useState('');
 
     const navigate = useNavigate();
 
@@ -26,15 +26,12 @@ function RegistrationForm() {
 
         try {
             const response = await axios.post('http://localhost:3000/register', data);
-            // Redirect to success page
             if (response.status === 201) {
                 navigate('/register-success');
             } else {
-                // Handle unexpected responses
                 setError('Unexpected response from server.');
             }
         } catch (error) {
-            // Setting the error meassage
             console.error('Error during registration:', error);
             setError('Registration failed. Please try again.');
         }
@@ -94,6 +91,10 @@ function RegistrationForm() {
                 </div>
                 <button type="submit">Register</button>
                 {error && <div className='error-message'>{error}</div>}
+                <div className="login-link">
+                    <span>Already have an account? </span>
+                    <Link to="/login">Log in here</Link>
+                </div>
             </form>
         </div>
     );

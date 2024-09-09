@@ -1,6 +1,6 @@
 import './LoginForm.css';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 function LoginForm() {
@@ -71,6 +71,10 @@ function LoginForm() {
                 </div>
                 <button type="submit">Login</button>
                 {error && <div className='error-message'>{error}</div>}
+                <div className="sign-in-link">
+                    <span>Don't have an account? </span>
+                    <Link to="/register">Sign in here</Link>
+                </div>
             </form>
         </div>
     );

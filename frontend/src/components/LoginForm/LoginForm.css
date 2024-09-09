@@ -75,6 +75,24 @@
     text-align: center;
 }
 
+.sign-in-link {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 1rem;
+    color: rgba(27, 4, 70, 0.85);
+}
+
+.sign-in-link a {
+    color: rgba(66, 8, 175, 0.9);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.sign-in-link a:hover {
+    color: rgba(66, 8, 175, 1);
+}
+
 @media (max-width: 500px) {
     .login-form {
         padding: 2rem;

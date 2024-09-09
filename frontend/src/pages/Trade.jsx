@@ -28,7 +28,7 @@ function Trade() {
     }, {});
 
     return (
-        <div>
+        <div className='content-container'>
             <Navbar />
             <TradeForm cryptoToUsdMap={cryptoToUsdMap} />
             {error && <p>{error}</p>}

@@ -119,7 +119,7 @@ function Portfolio() {
     };
 
     return (
-        <div>
+        <div className='content-container'>
             <Navbar />
             {error && <h1>{error}</h1>}
             {isLoggedIn && (
@@ -132,7 +132,7 @@ function Portfolio() {
                         </div>
                     )}
 
-                    <div>
+                    <div className='portfolio-info'>
                         <h1>Total invested: ${investment !== undefined ? Math.floor(investment * 100) / 100 : '0.00'}</h1>
                         <h1 
                             style={{

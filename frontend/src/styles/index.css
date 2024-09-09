@@ -8,9 +8,15 @@
   margin: 0;
 }
 
-h1 {
+.content-container {
+  background: linear-gradient(135deg, rgba(27, 4, 70, 0.85), rgba(66, 8, 175, 0.9));
+  height: 100vh;
+}
+
+.content-container h1 {
   text-align: center;
-  margin-top: 4rem;
+  margin-top: 2rem;
+  color: white;
 }
 
 .portfolio-container {
@@ -22,8 +28,23 @@ h1 {
 
 .doughnut-chart {
   height: 80vh;
-  width: 60vw;
+  width: 40vw;
+  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: white;
+  border-radius: 5rem;
+}
+
+@media (max-width: 900px) {
+  .doughnut-chart {
+    width: 80vw;
+    margin-top: 0.5rem;
+  }
+
+  .portfolio-container {
+    display: flex;
+    flex-direction: column;
+  }
 }
