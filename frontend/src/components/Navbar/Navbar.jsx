@@ -28,9 +28,9 @@ function Navbar() {
 
     return (
         <div className="navbar">
-            <a href="https://vitejs.dev" target="_blank">
+            <Link to="/home">
                 <img src={viteLogo} className="logo" alt="Vite logo" />
-            </a>
+            </Link>
             <div className={`hamburger ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
                 &#9776;
             </div>

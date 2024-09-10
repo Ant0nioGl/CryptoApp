@@ -133,7 +133,7 @@ function Portfolio() {
                     )}
 
                     <div className='portfolio-info'>
-                        <h1>Total invested: ${investment !== undefined ? Math.floor(investment * 100) / 100 : '0.00'}</h1>
+                        <h1 id='total-invested'>Total invested: ${investment !== undefined ? Math.floor(investment * 100) / 100 : '0.00'}</h1>
                         <h1 
                             style={{
                                 color: profit >= 0 ? 'green' : 'red'

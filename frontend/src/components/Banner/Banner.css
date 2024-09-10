@@ -81,7 +81,7 @@
 
 @media (max-width: 768px) {
   .banner-container h1 {
-    font-size: 4rem;
+    font-size: 3rem;
     letter-spacing: 0.4rem;
   }
 
@@ -96,7 +96,7 @@
 
 @media (max-width: 480px) {
   .banner-container h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     letter-spacing: 0.3rem;
   }
 
